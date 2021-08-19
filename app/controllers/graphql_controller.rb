@@ -4,70 +4,37 @@ class GraphqlController < ApplicationController
   # but you'll have to authenticate your user separately
   # protect_from_forgery with: :null_session
 
-  # def execute
-  #   variables = prepare_variables(params[:variables])
-  #   query = params[:query]
-  #   operation_name = params[:operationName]
-  #   context = {
-  #     # Query context goes here, for example:
-  #     # current_user: current_user,
-  #   }
-  #   result = GraphqlPocSchema.execute(query, variables: variables, context: context, operation_name: operation_name)
-  #   render json: result
-  # rescue StandardError => e
-  #   raise e unless Rails.env.development?
-  #   handle_error_in_development(e)
-  # end
-
-  def execute_user
+  def execute(schema)
     graphql_debugging = {
       query: params[:query],
       operationName: params[:operation_name],
       vars: params[:variables],
-      schema: UserService::UserSchema,
+      schema: schema,
     }
     puts graphql_debugging.inspect
 
-    result = UserService::UserSchema.execute(
+    result = schema.execute(
       params[:query],
       operation_name: params[:operation_name],
       variables: params[:variables],
     )
+
     render json: result.to_h
+  rescue StandardError => e
+    raise e unless Rails.env.development?
+    handle_error_in_development(e)
+  end
+
+  def execute_user
+    execute(UserService::UserSchema)
   end
 
   def execute_item
-    graphql_debugging = {
-      query: params[:query],
-      operationName: params[:operation_name],
-      vars: params[:variables],
-      schema: ItemService::ItemSchema,
-    }
-    puts graphql_debugging.inspect
-
-    result = ItemService::ItemSchema.execute(
-      params[:query],
-      operation_name: params[:operation_name],
-      variables: params[:variables],
-    )
-    render json: result.to_h
+    execute(ItemService::ItemSchema)
   end
 
   def execute_role
-    graphql_debugging = {
-      query: params[:query],
-      operationName: params[:operation_name],
-      vars: params[:variables],
-      schema: RoleService::RoleSchema,
-    }
-    puts graphql_debugging.inspect
-
-    result = RoleService::RoleSchema.execute(
-      params[:query],
-      operation_name: params[:operation_name],
-      variables: params[:variables],
-    )
-    render json: result.to_h
+    execute(RoleService::RoleSchema)
   end
 
   private
