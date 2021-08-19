@@ -1,5 +1,5 @@
 module Types
   class BaseField < GraphQL::Schema::Field
-    argument_class Types::BaseArgument
+    include  ApolloFederation::Field
   end
 end
