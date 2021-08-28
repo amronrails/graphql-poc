@@ -7,9 +7,9 @@
 #   Character.create(name: 'Luke', movie: movies.first)
 
 10.times do |i|
-  user = User.create(username: "User ##{i}", email: "user#{i}@mail.com")
-  user.roles.create()
+  user = User.create!(username: "User ##{i}", email: "user#{i}@mail.com")
+  user.roles.create!(title: 'User')
   10.times do |j|
-    user.items.create(name: "Item ##{j}")
+    user.items.create!(name: "Item ##{j}")
   end
 end
