@@ -1,33 +1,77 @@
 version: "3.4"
 services:
-  api:
+  user:
     build: .
-    command: bin/rails s -b 0.0.0.0
+    command: bin/rails s -p 80 -b 0.0.0.0
     depends_on:
       - db
     ports:
-      - 3000:3000
+      - 3000:80
     volumes:
       - ./:/app:delegated
+      - /app/tmp/pids
     environment:
       DATABASE_URL: db
+      GATEWAY_SERVICE_URL: gateway
+      ITEM_SERVICE_URL: http://item/graphql/item_service
+      ROLE_SERVICE_URL: http://role/graphql/role_service
     networks:
       - backend
+
+  item:
+    build: .
+    command: bin/rails s -p 80 -b 0.0.0.0
+    depends_on:
+      - db
+    ports:
+      - 3001:80
+    volumes:
+      - ./:/app:delegated
+      - /app/tmp/pids
+    environment:
+      DATABASE_URL: db
+      GATEWAY_SERVICE_URL: gateway
+      USER_SERVICE_URL: http://user/graphql/item_service
+      ROLE_SERVICE_URL: http://role/graphql/role_service
+    networks:
+      - backend
+
+  role:
+    build: .
+    command: bin/rails s -p 80 -b 0.0.0.0
+    depends_on:
+      - db
+    ports:
+      - 3002:80
+    volumes:
+      - ./:/app:delegated
+      - /app/tmp/pids
+    environment:
+      DATABASE_URL: db
+      GATEWAY_SERVICE_URL: gateway
+      USER_SERVICE_URL: http://user/graphql/item_service
+      ITEM_SERVICE_URL: http://item/graphql/role_service
+    networks:
+      - backend
+
   gateway:
     build: .
     command: sh -c 'sleep 1 && npm start'
     ports:
       - 5000:5000
     depends_on:
-      - api
+      - user
+      - item
+      - role
     volumes:
       - ./:/app:delegated
     networks:
       - backend
     environment:
-      USER_SERVICE_URL: http://api:3000/graphql/user_service
-      ITEM_SERVICE_URL: http://api:3000/graphql/item_service
-      ROLE_SERVICE_URL: http://api:3000/graphql/role_service
+      USER_SERVICE_URL: http://user/graphql/user_service
+      ITEM_SERVICE_URL: http://item/graphql/item_service
+      ROLE_SERVICE_URL: http://role/graphql/role_service
+
   db:
     image: postgres:latest
     ports:
