@@ -30,7 +30,6 @@ gem 'graphql'
 gem 'bootsnap', '>= 1.4.4', require: false
 gem 'apollo-federation'
 gem 'graphql-client'
-gem 'activerecord-import'
 
 group :development, :test do
   # Call 'byebug' anywhere in the code to stop execution and get a debugger console

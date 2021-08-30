@@ -1,15 +1,12 @@
-# This file should contain all the record creation needed to seed the database with its default values.
-# The data can then be loaded with the bin/rails db:seed command (or created alongside the database with db:setup).
-#
-# Examples:
-#
-#   movies = Movie.create([{ name: 'Star Wars' }, { name: 'Lord of the Rings' }])
-#   Character.create(name: 'Luke', movie: movies.first)
-
-10.times do |i|
-  user = User.create!(username: "User ##{i}", email: "user#{i}@mail.com")
-  user.roles.create!(title: 'User')
-  10.times do |j|
-    user.items.create!(name: "Item ##{j}")
+# SQL logging for seed.rb
+ActiveRecord::Base.logger = Logger.new(STDOUT)
+# Use `rails db:truncate_all` to get rid of data before populating
+ApplicationRecord.transaction do
+  10.times do |i|
+    user = User.create!(username: "user_#{i}", email: "user#{i}@mail.com")
+    user.roles.create!(title: 'User')
+    10.times do |j|
+      user.items.create!(name: "Item ##{j}")
+    end
   end
 end
