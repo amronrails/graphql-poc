@@ -47,8 +47,6 @@ GEM
     activerecord (6.1.4)
       activemodel (= 6.1.4)
       activesupport (= 6.1.4)
-    activerecord-import (1.2.0)
-      activerecord (>= 3.2)
     activestorage (6.1.4)
       actionpack (= 6.1.4)
       activejob (= 6.1.4)
@@ -87,15 +85,11 @@ GEM
     ffi (1.15.3)
     globalid (0.5.2)
       activesupport (>= 5.0)
-    google-protobuf (3.17.3)
     google-protobuf (3.17.3-universal-darwin)
     graphiql-rails (1.8.0)
       railties
       sprockets-rails
     graphql (1.12.14)
-    graphql-client (0.16.0)
-      activesupport (>= 3.0)
-      graphql (~> 1.8)
     i18n (1.8.10)
       concurrent-ruby (~> 1.0)
     jbuilder (2.11.2)
@@ -120,7 +114,6 @@ GEM
       racc (~> 1.4)
     nokogiri (1.12.3-x86_64-darwin)
       racc (~> 1.4)
-    pg (1.2.3)
     public_suffix (4.0.6)
     puma (5.4.0)
       nio4r (~> 2.0)
@@ -186,6 +179,7 @@ GEM
       actionpack (>= 4.0)
       activesupport (>= 4.0)
       sprockets (>= 3.0.0)
+    sqlite3 (1.4.2)
     thor (1.1.0)
     tilt (2.0.10)
     turbolinks (5.2.1)
@@ -219,23 +213,21 @@ PLATFORMS
   x86_64-darwin-19
 
 DEPENDENCIES
-  activerecord-import
   apollo-federation
   bootsnap (>= 1.4.4)
   byebug
   capybara (>= 3.26)
   graphiql-rails
   graphql
-  graphql-client
   jbuilder (~> 2.7)
   listen (~> 3.3)
-  pg
   puma (~> 5.0)
   rack-mini-profiler (~> 2.0)
   rails (~> 6.1.4)
   sass-rails (>= 6)
   selenium-webdriver
   spring
+  sqlite3 (~> 1.4)
   turbolinks (~> 5)
   tzinfo-data
   web-console (>= 4.1.0)

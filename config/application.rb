@@ -18,6 +18,5 @@ module GraphqlPoc
     #
     # config.time_zone = "Central Time (US & Canada)"
     # config.eager_load_paths << Rails.root.join("extras")
-    config.services = config_for(:services) # config/services.yml
   end
 end

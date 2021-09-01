@@ -2,7 +2,6 @@ module ItemService
 	class ItemSchema < GraphQL::Schema
 		include ApolloFederation::Schema
 
-		query(::ItemService::Queries::Root)
-		mutation(::ItemService::Mutations::Root)
+		orphan_types ItemService::Types::User, ItemService::Types::Item
 	end
 end

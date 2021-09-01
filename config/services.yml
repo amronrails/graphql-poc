@@ -1,8 +1,0 @@
-# config/payment.yml
-shared:
-  user_serivce:
-    url: <%= ENV.fetch('USER_SERVICE_URL', 'http://localhost:3000/graphql/user_serivce') %>
-  item_service: 
-    url: <%= ENV.fetch('ITEM_SERVICE_URL', 'http://localhost:3000/graphql/item_service') %>
-  role_service:
-    url: <%= ENV.fetch('ROLE_SERVICE_URL', 'http://localhost:3000/graphql/role_service') %>
