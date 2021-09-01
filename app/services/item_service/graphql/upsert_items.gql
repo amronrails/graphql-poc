@@ -1,0 +1,13 @@
+mutation ($itemsInput: [ItemInput!]!) {
+  upsertItems(itemsInput: $itemsInput) {
+    items {
+      id
+      name
+      userId
+    }
+    errors {
+      path
+      message
+    }
+  }
+}
