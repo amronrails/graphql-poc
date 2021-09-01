@@ -4,7 +4,6 @@ class CreateRoles < ActiveRecord::Migration[6.1]
       t.references :user, null: false, foreign_key: true
       t.string :title
 
-#     t.timestamps(default: -> {'CURRENT_TIMESTAMP::timestamp without time zone'})
       t.timestamps
     end
   end

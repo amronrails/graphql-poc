@@ -4,7 +4,6 @@ class CreateUsers < ActiveRecord::Migration[6.1]
       t.string :username
       t.string :email
 
-#     t.timestamps(default: -> {'CURRENT_TIMESTAMP::timestamp without time zone'})
       t.timestamps
     end
   end
