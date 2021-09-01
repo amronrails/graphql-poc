@@ -3,9 +3,9 @@ const { ApolloGateway } = require('@apollo/gateway');
 
 const gateway = new ApolloGateway({
   serviceList: [
-    { name: 'users', url: 'http://localhost:3000/graphql/user_service' },
-    { name: 'items', url: 'http://localhost:3000/graphql/item_service' },
-    { name: 'roles', url: 'http://localhost:3000/graphql/role_service' },
+    { name: 'users', url: process.env.USER_SERVICE_URL || 'http://localhost:3000/graphql/user_service' },
+    { name: 'items', url: process.env.ITEM_SERVICE_URL || 'http://localhost:3000/graphql/item_service' },
+    { name: 'roles', url: process.env.ROLE_SERVICE_URL || 'http://localhost:3000/graphql/role_service' },
   ],
   debug: true,
 });
