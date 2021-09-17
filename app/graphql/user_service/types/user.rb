@@ -1,16 +1,15 @@
 module UserService::Types
 	class User < Types::BaseObject
-		key fields: 'id'
-
 		field :id, ID, null: false
-		field :name, String, null: true
 		field :username, String, null: true
 		field :email, String, null: true
+    	field :roles, [Role], null: true
 		field :created_at, GraphQL::Types::ISO8601DateTime, null: false
 		field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
+    	field :errors, ::UserService::Types::UserError, null: true
 
-		def self.resolve_reference(object, _context)
-			::User.find(object[:id])
-		end
+    	def errors
+    		object.errors.to_h
+    	end
 	end
 end

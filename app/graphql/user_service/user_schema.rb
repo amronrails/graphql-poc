@@ -7,5 +7,6 @@ module UserService
 	  include ApolloFederation::Schema
 
 	  query(::UserService::Queries::Root)
+	  mutation(::UserService::Mutation::Root)
 	end
 end
