@@ -5,10 +5,6 @@ module RoleService::Types
     field :user_id, ID, null: true
     field :created_at, GraphQL::Types::ISO8601DateTime, null: false
     field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    field :errors, ::RoleService::Types::RoleError, null: true
-    
-    def errors
-      object.errors.to_h
-    end
+    field :previous_version, Integer, null: false
   end
 end

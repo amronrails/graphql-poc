@@ -3,7 +3,6 @@ module RoleService
 		include ApolloFederation::Schema
 
 		mutation(::RoleService::Mutation::Root)
-
-		orphan_types ::RoleService::Types::User, ::RoleService::Types::Role
+		query(::RoleService::Queries::Root)
 	end
 end

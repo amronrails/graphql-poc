@@ -1,10 +1,12 @@
 module UserService::Queries
   class Root < ::Types::BaseObject
-    field :me, ::UserService::Types::User, null: true
+    field :user, ::UserService::Types::User, null: true do
+      argument :id, ID, required: true
+    end
     field :users, [::UserService::Types::User], null: true
     
-    def me
-      User.first
+    def user(id:)
+      User.find(id)
     end
   	
   	def users

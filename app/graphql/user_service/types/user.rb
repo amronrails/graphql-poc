@@ -6,10 +6,5 @@ module UserService::Types
     	field :roles, [Role], null: true
 		field :created_at, GraphQL::Types::ISO8601DateTime, null: false
 		field :updated_at, GraphQL::Types::ISO8601DateTime, null: false
-    	field :errors, ::UserService::Types::UserError, null: true
-
-    	def errors
-    		object.errors.to_h
-    	end
 	end
 end

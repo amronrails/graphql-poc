@@ -3,6 +3,6 @@ module UserService::Types
 		field :id, ID, null: false
 		field :title, String, null: true
 		field :user_id, ID, null: true
-		field :errors, ::UserService::Types::RoleError, null: true
+		field :previous_version, Integer, null: true
 	end
 end
